@@ -34,3 +34,7 @@ A full-stack Expense Tracker application built using **Spring Boot (Java)** for 
 
 ## 📂 Project Structure
 
+## 💻 UI Preview
+
+![Expense Tracker UI](https://raw.githubusercontent.com/saikrishnaCEO/expense-tracker/main/expense-frontend/index-screenshot.png)
+
