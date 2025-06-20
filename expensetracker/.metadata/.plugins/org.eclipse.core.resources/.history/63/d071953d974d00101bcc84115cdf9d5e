@@ -1,0 +1,54 @@
+package com.expensetracker.controller.copy;
+
+import com.expensetracker.model.Expense;
+import com.expensetracker.service.ExpenseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/expenses")
+@CrossOrigin(origins = "*")          // remove or restrict later if needed
+public class ExpenseController {
+
+
+    @Autowired
+    private ExpenseService expenseService;
+
+    // GET /api/expenses
+    @GetMapping
+    public ResponseEntity<List<Expense>> getAllExpenses() {
+        return ResponseEntity.ok(expenseService.getAllExpenses());
+    }
+
+    // GET /api/expenses/{id}
+    @GetMapping("/{id}")
+    public ResponseEntity<Expense> getExpenseById(@PathVariable Long id) {
+        Expense exp = expenseService.getExpenseById(id);
+        return (exp != null) ? ResponseEntity.ok(exp) : ResponseEntity.notFound().build();
+    }
+
+    // POST /api/expenses
+    @PostMapping
+    public ResponseEntity<Expense> createExpense(@RequestBody Expense expense) {
+        Expense saved = expenseService.createExpense(expense);
+        return ResponseEntity.ok(saved);
+    }
+
+    // PUT /api/expenses/{id}
+    @PutMapping("/{id}")
+    public ResponseEntity<Expense> updateExpense(@PathVariable Long id,
+                                                 @RequestBody Expense expense) {
+        Expense updated = expenseService.updateExpense(id, expense);
+        return (updated != null) ? ResponseEntity.ok(updated) : ResponseEntity.notFound().build();
+    }
+
+    // DELETE /api/expenses/{id}
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
+        expenseService.deleteExpense(id);
+        return ResponseEntity.noContent().build();
+    }
+}

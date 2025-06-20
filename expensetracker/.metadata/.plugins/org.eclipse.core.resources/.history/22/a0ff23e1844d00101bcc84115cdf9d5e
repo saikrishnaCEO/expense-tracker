@@ -1,0 +1,5 @@
+package com.expensetracker.api;
+
+public class Expense {
+
+}
